@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 function App() {
   const [count, setCount] = useState(0)
@@ -116,19 +117,6 @@ function App() {
       <div className="ticks"></div>
       <section id="spacer"></section>
     </>
-  )
-}
-import { SpeedInsights } from "@vercel/speed-insights/react"
-
-function App() {
-  return (
-    <div>
-      {/* আপনার বাকি কোড এখানে থাকবে */}
-      <h1>TexCalc is running!</h1>
-      
-      {/* একদম নিচে এটি যোগ করুন */}
-      <SpeedInsights />
-    </div>
   )
 }
 
