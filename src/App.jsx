@@ -118,5 +118,18 @@ function App() {
     </>
   )
 }
+import { SpeedInsights } from "@vercel/speed-insights/react"
+
+function App() {
+  return (
+    <div>
+      {/* আপনার বাকি কোড এখানে থাকবে */}
+      <h1>TexCalc is running!</h1>
+      
+      {/* একদম নিচে এটি যোগ করুন */}
+      <SpeedInsights />
+    </div>
+  )
+}
 
 export default App
