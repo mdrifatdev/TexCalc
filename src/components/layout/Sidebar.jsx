@@ -1,8 +1,9 @@
-import { NavLink } from 'react-router-dom';
-import { Wind, Grid3x3, Layers, Droplets, Shirt, ClipboardCheck, Home } from 'lucide-react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { Wind, Grid3x3, Layers, Droplets, Shirt, ClipboardCheck, Home, Star } from 'lucide-react';
 import { useLang } from '../../context/LangContext';
+import { useApp } from '../../context/AppContext';
+import { ALL_CALCULATORS } from '../../utils/calculators';
 
-// Category nav items — add a new entry here to add a sidebar item
 const navItems = [
   { path: '/',         labelKey: 'home',     icon: Home },
   { path: '/spinning', labelKey: 'spinning', icon: Wind },
@@ -14,7 +15,9 @@ const navItems = [
 ];
 
 export default function Sidebar({ open, onClose }) {
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const { favorites } = useApp();
+  const navigate = useNavigate();
 
   const linkClass = ({ isActive }) =>
     [
@@ -24,9 +27,14 @@ export default function Sidebar({ open, onClose }) {
         : 'border-l-4 border-transparent text-light-muted dark:text-dark-muted hover:text-slate-900 dark:hover:text-white hover:bg-light-border/50 dark:hover:bg-dark-border/50',
     ].join(' ');
 
+  // Lookup favorite calculator info for sidebar display
+  const favCalcs = favorites
+    .map((id) => ALL_CALCULATORS.find((c) => c.id === id))
+    .filter(Boolean);
+
   return (
     <>
-      {/* Mobile overlay backdrop */}
+      {/* Mobile overlay */}
       {open && (
         <div
           className="fixed inset-0 z-40 bg-black/50 lg:hidden"
@@ -34,19 +42,17 @@ export default function Sidebar({ open, onClose }) {
         />
       )}
 
-      {/* Sidebar panel */}
       <aside
         className={[
           'fixed top-16 left-0 z-40 h-[calc(100vh-4rem)] w-60 flex flex-col',
           'bg-light-surface dark:bg-dark-surface border-r border-light-border dark:border-dark-border',
           'transition-transform duration-300 ease-in-out',
-          // Desktop: always visible; Mobile: slide in/out
-          'lg:translate-x-0',
+          'lg:translate-x-0 lg:static lg:h-auto lg:z-auto',
           open ? 'translate-x-0' : '-translate-x-full',
-          'lg:static lg:h-auto lg:z-auto',
         ].join(' ')}
       >
-        <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+        {/* Main nav */}
+        <nav className="overflow-y-auto py-4 px-3 space-y-1">
           {navItems.map(({ path, labelKey, icon: Icon }) => (
             <NavLink
               key={path}
@@ -56,10 +62,34 @@ export default function Sidebar({ open, onClose }) {
               onClick={onClose}
             >
               <Icon size={18} />
-              <span>{t(labelKey) || labelKey}</span>
+              <span>{t(labelKey)}</span>
             </NavLink>
           ))}
         </nav>
+
+        {/* Favourites section */}
+        {favCalcs.length > 0 && (
+          <div className="border-t border-light-border dark:border-dark-border px-3 py-4">
+            <p className="text-[10px] font-semibold text-light-muted dark:text-dark-muted uppercase tracking-wider mb-2 px-1">
+              {t('favoritesTitle')}
+            </p>
+            <div className="space-y-1">
+              {favCalcs.map((c) => (
+                <button
+                  key={c.id}
+                  onClick={() => {
+                    navigate(c.page, { state: { tab: c.tabId } });
+                    onClose();
+                  }}
+                  className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-xs text-light-muted dark:text-dark-muted hover:text-accent hover:bg-accent/10 transition-all duration-200"
+                >
+                  <Star size={11} className="fill-accent text-accent shrink-0" />
+                  <span className="truncate">{c[lang === 'bn' ? 'bn' : 'en']}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </aside>
     </>
   );
