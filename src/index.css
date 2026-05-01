@@ -1,1 +1,67 @@
 @import "tailwindcss";
+
+/* ─── Dark mode: class strategy ──────────────────────────────────────────────
+   Apply the `dark` class to <html> to enable dark mode styles. */
+@variant dark (&:where(.dark, .dark *));
+
+/* ─── Custom design tokens ───────────────────────────────────────────────────
+   All brand colors and typography tokens for TexCalc.
+   To change colors: edit values here only. */
+@theme {
+  /* Dark theme surfaces */
+  --color-dark-bg: #0f1117;
+  --color-dark-surface: #1a1d27;
+  --color-dark-border: #2a2d3a;
+  --color-dark-muted: #94a3b8;
+
+  /* Light theme surfaces */
+  --color-light-bg: #f8f9fc;
+  --color-light-surface: #ffffff;
+  --color-light-border: #e2e8f0;
+  --color-light-muted: #64748b;
+
+  /* Accent — same in both themes */
+  --color-accent: #f59e0b;
+  --color-accent-hover: #d97706;
+
+  /* Typography */
+  --font-family-sans: 'Sora', sans-serif;
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────────*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Sora', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Number input — hide spin arrows for cleaner look ───────────────────────*/
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+/* ─── Scrollbar styling ──────────────────────────────────────────────────────*/
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-dark-border);
+  border-radius: 3px;
+}
