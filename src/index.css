@@ -5,27 +5,67 @@
 @variant dark (&:where(.dark, .dark *));
 
 /* ─── Custom design tokens ───────────────────────────────────────────────────
-   All brand colors and typography tokens for TexCalc.
-   To change colors: edit values here only. */
+   All brand colors, typography, and animation tokens for TexCalc. */
 @theme {
   /* Dark theme surfaces */
-  --color-dark-bg: #0f1117;
+  --color-dark-bg:      #0f1117;
   --color-dark-surface: #1a1d27;
-  --color-dark-border: #2a2d3a;
-  --color-dark-muted: #94a3b8;
+  --color-dark-border:  #2a2d3a;
+  --color-dark-muted:   #94a3b8;
 
   /* Light theme surfaces */
-  --color-light-bg: #f8f9fc;
+  --color-light-bg:      #f8f9fc;
   --color-light-surface: #ffffff;
-  --color-light-border: #e2e8f0;
-  --color-light-muted: #64748b;
+  --color-light-border:  #e2e8f0;
+  --color-light-muted:   #64748b;
 
   /* Accent — same in both themes */
-  --color-accent: #f59e0b;
+  --color-accent:       #f59e0b;
   --color-accent-hover: #d97706;
 
   /* Typography */
   --font-family-sans: 'Sora', sans-serif;
+
+  /* ── Animation utilities ────────────────────────────────────────────────── */
+  --animate-fade-up:    fade-up   0.45s cubic-bezier(0.22,1,0.36,1) both;
+  --animate-fade-in:    fade-in   0.3s  ease both;
+  --animate-scale-in:   scale-in  0.35s cubic-bezier(0.22,1,0.36,1) both;
+  --animate-slide-down: slide-down 0.22s cubic-bezier(0.22,1,0.36,1) both;
+  --animate-pop:        pop       0.28s cubic-bezier(0.34,1.56,0.64,1);
+  --animate-shimmer:    shimmer   1.6s  ease infinite;
+}
+
+/* ─── Keyframes ──────────────────────────────────────────────────────────────*/
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.93); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pop {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.55; }
+  100% { opacity: 1; }
 }
 
 /* ─── Base ───────────────────────────────────────────────────────────────────*/
@@ -44,7 +84,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Number input — hide spin arrows for cleaner look ───────────────────────*/
+/* ─── Number input — hide spin arrows ────────────────────────────────────────*/
 input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -55,13 +95,6 @@ input[type='number'] {
 }
 
 /* ─── Scrollbar styling ──────────────────────────────────────────────────────*/
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-dark-border);
-  border-radius: 3px;
-}
+::-webkit-scrollbar        { width: 5px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: var(--color-dark-border); border-radius: 3px; }

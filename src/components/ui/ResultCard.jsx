@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Copy, Check } from 'lucide-react';
 import { useLang } from '../../context/LangContext';
 
@@ -6,6 +6,18 @@ import { useLang } from '../../context/LangContext';
 export default function ResultCard({ label, value, unit }) {
   const { t } = useLang();
   const [copied, setCopied] = useState(false);
+  const [pop, setPop] = useState(false);
+
+  // Trigger pop animation whenever value changes to a valid result
+  useEffect(() => {
+    if (value === null || value === undefined || value === '' || value === '—') return;
+    setPop(false);
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => setPop(true));
+    });
+    const timer = setTimeout(() => setPop(false), 350);
+    return () => { cancelAnimationFrame(id); clearTimeout(timer); };
+  }, [value]);
 
   const handleCopy = () => {
     if (value === null || value === undefined || value === '') return;
@@ -28,7 +40,12 @@ export default function ResultCard({ label, value, unit }) {
         <p className="text-xs text-light-muted dark:text-dark-muted mb-1 transition-colors duration-200">
           {label}
         </p>
-        <p className="text-2xl font-semibold text-accent transition-colors duration-200">
+        <p
+          className={[
+            'text-2xl font-semibold text-accent transition-colors duration-200 inline-block',
+            pop ? 'animate-pop' : '',
+          ].join(' ')}
+        >
           {displayValue}
           {unit && (
             <span className="text-sm font-normal text-light-muted dark:text-dark-muted ml-1.5">
@@ -41,7 +58,7 @@ export default function ResultCard({ label, value, unit }) {
       <button
         onClick={handleCopy}
         title={copied ? t('copied') : t('copy')}
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-light-bg dark:bg-dark-bg border border-light-border dark:border-dark-border text-xs text-light-muted dark:text-dark-muted hover:text-accent hover:border-accent transition-all duration-200"
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-light-bg dark:bg-dark-bg border border-light-border dark:border-dark-border text-xs text-light-muted dark:text-dark-muted hover:text-accent hover:border-accent transition-all duration-200 shrink-0"
       >
         {copied ? (
           <>

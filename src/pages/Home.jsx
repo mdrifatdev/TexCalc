@@ -7,21 +7,23 @@ import { useApp } from '../context/AppContext';
 import { ALL_CALCULATORS } from '../utils/calculators';
 
 const CATEGORIES = [
-  { icon: Wind,          titleKey: 'spinning', descKey: 'spinningDesc', path: '/spinning' },
-  { icon: Grid3x3,       titleKey: 'weaving',  descKey: 'weavingDesc',  path: '/weaving'  },
-  { icon: Layers,        titleKey: 'knitting', descKey: 'knittingDesc', path: '/knitting' },
-  { icon: Droplets,      titleKey: 'dyeing',   descKey: 'dyeingDesc',   path: '/dyeing'   },
-  { icon: Shirt,         titleKey: 'garments', descKey: 'garmentsDesc', path: '/garments' },
-  { icon: ClipboardCheck,titleKey: 'ttqc',     descKey: 'ttqcDesc',     path: '/ttqc'     },
+  { icon: Wind,           titleKey: 'spinning', descKey: 'spinningDesc', path: '/spinning' },
+  { icon: Grid3x3,        titleKey: 'weaving',  descKey: 'weavingDesc',  path: '/weaving'  },
+  { icon: Layers,         titleKey: 'knitting', descKey: 'knittingDesc', path: '/knitting' },
+  { icon: Droplets,       titleKey: 'dyeing',   descKey: 'dyeingDesc',   path: '/dyeing'   },
+  { icon: Shirt,          titleKey: 'garments', descKey: 'garmentsDesc', path: '/garments' },
+  { icon: ClipboardCheck, titleKey: 'ttqc',     descKey: 'ttqcDesc',     path: '/ttqc'     },
 ];
 
-const CATEGORY_BN = { spinning:'স্পিনিং', weaving:'উইভিং', knitting:'নিটিং', dyeing:'ডাইং', garments:'গার্মেন্টস', ttqc:'টিটিকিউসি' };
+const CATEGORY_BN = {
+  spinning: 'স্পিনিং', weaving: 'উইভিং', knitting: 'নিটিং',
+  dyeing: 'ডাইং', garments: 'গার্মেন্টস', ttqc: 'টিটিকিউসি',
+};
 
 export default function Home() {
   const { t, lang } = useLang();
   const { history, clearHistory, favorites, isFavorite } = useApp();
   const navigate = useNavigate();
-
   const [query, setQuery] = useState('');
 
   const searchResults = query.trim().length > 0
@@ -42,19 +44,31 @@ export default function Home() {
       <div className="relative rounded-2xl overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-accent/5 dark:from-accent/10" />
         <div className="relative px-6 py-12 md:px-12">
-          <p className="text-xs font-semibold text-accent uppercase tracking-widest mb-3">
+          <p
+            className="text-xs font-semibold text-accent uppercase tracking-widest mb-3 animate-fade-up"
+            style={{ animationDelay: '0ms' }}
+          >
             {t('heroNote')}
           </p>
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 leading-tight transition-colors duration-200">
+          <h1
+            className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 leading-tight transition-colors duration-200 animate-fade-up"
+            style={{ animationDelay: '80ms' }}
+          >
             {t('heroTitle')}
           </h1>
-          <p className="text-light-muted dark:text-dark-muted max-w-xl text-base mb-6 transition-colors duration-200">
+          <p
+            className="text-light-muted dark:text-dark-muted max-w-xl text-base mb-6 transition-colors duration-200 animate-fade-up"
+            style={{ animationDelay: '140ms' }}
+          >
             {t('heroSubtitle')}
           </p>
 
-          {/* Search bar — mobile-friendly inline version */}
-          <div className="relative max-w-md sm:hidden">
-            <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-light-border dark:border-dark-border bg-light-surface/80 dark:bg-dark-surface/80 backdrop-blur">
+          {/* Search bar — mobile only */}
+          <div
+            className="relative max-w-md sm:hidden animate-fade-up"
+            style={{ animationDelay: '200ms' }}
+          >
+            <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-light-border dark:border-dark-border bg-light-surface/80 dark:bg-dark-surface/80 backdrop-blur transition-all duration-200 focus-within:border-accent focus-within:ring-1 focus-within:ring-accent/30">
               <Search size={16} className="text-light-muted dark:text-dark-muted shrink-0" />
               <input
                 value={query}
@@ -63,26 +77,29 @@ export default function Home() {
                 className="flex-1 bg-transparent text-sm text-slate-900 dark:text-white placeholder-light-muted dark:placeholder-dark-muted outline-none"
               />
               {query && (
-                <button onClick={() => setQuery('')}><X size={14} className="text-light-muted dark:text-dark-muted" /></button>
+                <button onClick={() => setQuery('')}>
+                  <X size={14} className="text-light-muted dark:text-dark-muted" />
+                </button>
               )}
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── Inline search results (mobile only / when query present) ─────────── */}
+      {/* ── Inline search results ─────────────────────────────────────────────── */}
       {query.trim().length > 0 && (
-        <div>
+        <div className="animate-slide-down">
           <h2 className="text-xs font-semibold text-light-muted dark:text-dark-muted uppercase tracking-wider mb-3">
             {t('searchPlaceholder').replace('…', '')} — "{query}"
           </h2>
           {searchResults.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {searchResults.map((c) => (
+              {searchResults.map((c, i) => (
                 <button
                   key={c.id}
                   onClick={() => navigate(c.page, { state: { tab: c.tabId } })}
-                  className="flex items-center gap-3 p-4 rounded-xl border border-light-border dark:border-dark-border bg-light-surface dark:bg-dark-surface hover:border-accent transition-all duration-200 text-left"
+                  className="flex items-center gap-3 p-4 rounded-xl border border-light-border dark:border-dark-border bg-light-surface dark:bg-dark-surface hover:border-accent hover:-translate-y-0.5 transition-all duration-200 text-left animate-fade-up"
+                  style={{ animationDelay: `${i * 40}ms` }}
                 >
                   <span className="text-xs px-2 py-0.5 rounded-full bg-accent/10 text-accent font-medium capitalize shrink-0">
                     {lang === 'bn' ? CATEGORY_BN[c.category] : c.category}
@@ -99,7 +116,7 @@ export default function Home() {
 
       {/* ── Favourites ────────────────────────────────────────────────────────── */}
       {favCalcs.length > 0 && (
-        <div>
+        <div className="animate-fade-up" style={{ animationDelay: '60ms' }}>
           <h2 className="text-xs font-semibold text-light-muted dark:text-dark-muted uppercase tracking-wider mb-3 flex items-center gap-2">
             <Star size={12} className="fill-accent text-accent" />
             {t('favoritesTitle')}
@@ -109,7 +126,7 @@ export default function Home() {
               <button
                 key={c.id}
                 onClick={() => navigate(c.page, { state: { tab: c.tabId } })}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg border border-accent/40 bg-accent/5 text-sm text-accent hover:bg-accent/10 transition-all duration-200"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg border border-accent/40 bg-accent/5 text-sm text-accent hover:bg-accent/15 hover:border-accent transition-all duration-200 hover:-translate-y-0.5"
               >
                 <Star size={12} className="fill-accent" />
                 {c[lang === 'bn' ? 'bn' : 'en']}
@@ -121,7 +138,7 @@ export default function Home() {
 
       {/* ── Recent History ────────────────────────────────────────────────────── */}
       {history.length > 0 && (
-        <div>
+        <div className="animate-fade-up" style={{ animationDelay: '100ms' }}>
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-xs font-semibold text-light-muted dark:text-dark-muted uppercase tracking-wider flex items-center gap-2">
               <Clock size={12} />
@@ -136,11 +153,12 @@ export default function Home() {
             </button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {history.slice(0, 6).map((h) => (
+            {history.slice(0, 6).map((h, i) => (
               <button
                 key={h.id}
                 onClick={() => navigate(h.page, { state: { tab: h.tabId } })}
-                className="text-left p-4 rounded-xl border border-light-border dark:border-dark-border bg-light-surface dark:bg-dark-surface hover:border-accent transition-all duration-200"
+                className="text-left p-4 rounded-xl border border-light-border dark:border-dark-border bg-light-surface dark:bg-dark-surface hover:border-accent hover:-translate-y-0.5 transition-all duration-200 animate-scale-in"
+                style={{ animationDelay: `${i * 50}ms` }}
               >
                 <div className="flex items-start justify-between gap-2 mb-2">
                   <span className="text-xs px-2 py-0.5 rounded-full bg-accent/10 text-accent font-medium capitalize">
@@ -150,7 +168,8 @@ export default function Home() {
                 </div>
                 <p className="text-xs font-medium text-slate-900 dark:text-white truncate">{h.calcName}</p>
                 <p className="text-lg font-bold text-accent mt-1 truncate">
-                  {h.resultValue} <span className="text-xs font-normal text-light-muted dark:text-dark-muted">{h.resultUnit}</span>
+                  {h.resultValue}{' '}
+                  <span className="text-xs font-normal text-light-muted dark:text-dark-muted">{h.resultUnit}</span>
                 </p>
               </button>
             ))}
@@ -158,19 +177,20 @@ export default function Home() {
         </div>
       )}
 
-      {/* ── Category grid — 2 col mobile, 3 col desktop (fix #4) ─────────────── */}
-      <div>
+      {/* ── Category grid ─────────────────────────────────────────────────────── */}
+      <div className="animate-fade-up" style={{ animationDelay: '80ms' }}>
         <h2 className="text-xs font-semibold text-light-muted dark:text-dark-muted uppercase tracking-wider mb-4 transition-colors duration-200">
           {t('categoriesTitle')}
         </h2>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-          {CATEGORIES.map((cat) => (
+          {CATEGORIES.map((cat, i) => (
             <CategoryCard
               key={cat.path}
               icon={cat.icon}
               title={t(cat.titleKey)}
               description={t(cat.descKey)}
               path={cat.path}
+              delay={i * 60}
             />
           ))}
         </div>

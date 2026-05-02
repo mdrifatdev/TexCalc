@@ -36,7 +36,7 @@ export default function Sidebar({ open, onClose }) {
       {/* Mobile overlay */}
       {open && (
         <div
-          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden animate-fade-in"
           onClick={onClose}
         />
       )}
@@ -52,23 +52,28 @@ export default function Sidebar({ open, onClose }) {
       >
         {/* Main nav */}
         <nav className="overflow-y-auto py-4 px-3 space-y-1 flex-1">
-          {navItems.map(({ path, labelKey, icon: Icon }) => (
-            <NavLink
+          {navItems.map(({ path, labelKey, icon: Icon }, idx) => (
+            <div
               key={path}
-              to={path}
-              end={path === '/'}
-              className={linkClass}
-              onClick={onClose}
+              className="animate-fade-up"
+              style={{ animationDelay: `${idx * 45}ms` }}
             >
-              <Icon size={18} />
-              <span>{t(labelKey)}</span>
-            </NavLink>
+              <NavLink
+                to={path}
+                end={path === '/'}
+                className={linkClass}
+                onClick={onClose}
+              >
+                <Icon size={18} />
+                <span>{t(labelKey)}</span>
+              </NavLink>
+            </div>
           ))}
         </nav>
 
         {/* Favourites section */}
         {favCalcs.length > 0 && (
-          <div className="border-t border-light-border dark:border-dark-border px-3 py-4 shrink-0 max-h-52 overflow-y-auto">
+          <div className="border-t border-light-border dark:border-dark-border px-3 py-4 shrink-0 max-h-52 overflow-y-auto animate-fade-up">
             <p className="text-[10px] font-semibold text-light-muted dark:text-dark-muted uppercase tracking-wider mb-2 px-1">
               {t('favoritesTitle')}
             </p>

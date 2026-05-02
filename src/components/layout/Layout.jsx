@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import { useLang } from '../../context/LangContext';
@@ -7,6 +7,7 @@ import { useLang } from '../../context/LangContext';
 export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { t } = useLang();
+  const location = useLocation();
 
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg transition-colors duration-200 font-sans">
@@ -16,7 +17,10 @@ export default function Layout() {
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       <main className="min-h-[calc(100vh-4rem)] lg:ml-60 p-4 md:p-6 lg:p-8">
-        <Outlet />
+        {/* key re-mounts on route change → triggers fade-up animation */}
+        <div key={location.pathname} className="animate-fade-up">
+          <Outlet />
+        </div>
       </main>
 
       <footer className="lg:ml-60 border-t border-light-border dark:border-dark-border transition-colors duration-200">
