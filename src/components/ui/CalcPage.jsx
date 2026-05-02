@@ -10,7 +10,6 @@ export default function CalcPage({
   tabs,
   activeTab,
   onTabChange,
-  // calcId prefix for favorites: e.g. 'sp', 'wv' — combined with tab id
   calcPrefix,
   children,
 }) {
@@ -21,20 +20,20 @@ export default function CalcPage({
     <div className="max-w-5xl mx-auto">
       {/* Page header */}
       <div className="mb-6 flex items-start gap-4">
-        <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-accent/10 text-accent shrink-0 mt-1">
-          <Icon size={22} />
+        <div className="flex items-center justify-center w-11 h-11 md:w-12 md:h-12 rounded-xl bg-accent/10 text-accent shrink-0 mt-1">
+          <Icon size={20} />
         </div>
-        <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white transition-colors duration-200">
+        <div className="min-w-0">
+          <h1 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white transition-colors duration-200">
             {t(titleKey)}
           </h1>
-          <p className="text-sm text-light-muted dark:text-dark-muted mt-1 transition-colors duration-200">
+          <p className="text-sm text-light-muted dark:text-dark-muted mt-1 transition-colors duration-200 line-clamp-2">
             {t(descKey)}
           </p>
         </div>
       </div>
 
-      {/* Tab bar — horizontal scroll, no wrap (fix #1) */}
+      {/* Tab bar — horizontal scroll, no wrap */}
       {tabs && tabs.length > 0 && (
         <div className="flex overflow-x-auto gap-2 mb-6 pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {tabs.map((tab) => {
@@ -53,7 +52,6 @@ export default function CalcPage({
                 ].join(' ')}
               >
                 <span>{t(tab.labelKey)}</span>
-                {/* Star / favourite toggle */}
                 <span
                   role="button"
                   tabIndex={0}
@@ -77,21 +75,20 @@ export default function CalcPage({
         </div>
       )}
 
-      {/* Two-column layout: inputs | results (single calcs use InputPanel + ResultPanel)
-          Multi-calc tabs render CalcCards which span col-span-full */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Two-column layout: md+ for tablets, single col on mobile */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         {children}
       </div>
     </div>
   );
 }
 
-// ─── InputPanel — left column for single-calc tabs ─────────────────────────
+// ─── InputPanel — left column ───────────────────────────────────────────────
 export function InputPanel({ children, onReset }) {
   const { t } = useLang();
   return (
-    <div className="rounded-2xl border border-light-border dark:border-dark-border bg-light-surface dark:bg-dark-surface p-6 space-y-4 transition-colors duration-200">
-      <h2 className="text-xs font-semibold text-light-muted dark:text-dark-muted uppercase tracking-wider transition-colors duration-200">
+    <div className="rounded-2xl border border-light-border dark:border-dark-border bg-light-surface dark:bg-dark-surface p-4 md:p-6 space-y-4 transition-colors duration-200">
+      <h2 className="text-xs font-semibold text-light-muted dark:text-dark-muted uppercase tracking-wider">
         {t('inputs')}
       </h2>
       {children}
@@ -105,12 +102,12 @@ export function InputPanel({ children, onReset }) {
   );
 }
 
-// ─── ResultPanel — right column for single-calc tabs ───────────────────────
+// ─── ResultPanel — right column ─────────────────────────────────────────────
 export function ResultPanel({ children }) {
   const { t } = useLang();
   return (
-    <div className="rounded-2xl border border-light-border dark:border-dark-border bg-light-surface dark:bg-dark-surface p-6 space-y-4 transition-colors duration-200">
-      <h2 className="text-xs font-semibold text-light-muted dark:text-dark-muted uppercase tracking-wider transition-colors duration-200">
+    <div className="rounded-2xl border border-light-border dark:border-dark-border bg-light-surface dark:bg-dark-surface p-4 md:p-6 space-y-4 transition-colors duration-200">
+      <h2 className="text-xs font-semibold text-light-muted dark:text-dark-muted uppercase tracking-wider">
         {t('result')}
       </h2>
       {children}
@@ -122,13 +119,13 @@ export function ResultPanel({ children }) {
 export function CalcCard({ titleKey, children }) {
   const { t } = useLang();
   return (
-    <div className="col-span-full rounded-xl border border-light-border dark:border-dark-border bg-light-surface dark:bg-dark-surface p-5 transition-colors duration-200">
+    <div className="col-span-full rounded-xl border border-light-border dark:border-dark-border bg-light-surface dark:bg-dark-surface p-4 md:p-5 transition-colors duration-200">
       {titleKey && (
         <h3 className="text-sm font-semibold text-slate-900 dark:text-white pb-3 mb-4 border-b border-light-border dark:border-dark-border transition-colors duration-200">
           {t(titleKey)}
         </h3>
       )}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {children}
       </div>
     </div>

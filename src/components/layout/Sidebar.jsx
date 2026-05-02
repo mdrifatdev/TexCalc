@@ -27,7 +27,6 @@ export default function Sidebar({ open, onClose }) {
         : 'border-l-4 border-transparent text-light-muted dark:text-dark-muted hover:text-slate-900 dark:hover:text-white hover:bg-light-border/50 dark:hover:bg-dark-border/50',
     ].join(' ');
 
-  // Lookup favorite calculator info for sidebar display
   const favCalcs = favorites
     .map((id) => ALL_CALCULATORS.find((c) => c.id === id))
     .filter(Boolean);
@@ -42,17 +41,17 @@ export default function Sidebar({ open, onClose }) {
         />
       )}
 
+      {/* Sidebar — always fixed, visible on lg+ via lg:translate-x-0 */}
       <aside
         className={[
           'fixed top-16 left-0 z-40 h-[calc(100vh-4rem)] w-60 flex flex-col',
           'bg-light-surface dark:bg-dark-surface border-r border-light-border dark:border-dark-border',
           'transition-transform duration-300 ease-in-out',
-          'lg:translate-x-0 lg:static lg:h-auto lg:z-auto',
-          open ? 'translate-x-0' : '-translate-x-full',
+          open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',
         ].join(' ')}
       >
         {/* Main nav */}
-        <nav className="overflow-y-auto py-4 px-3 space-y-1">
+        <nav className="overflow-y-auto py-4 px-3 space-y-1 flex-1">
           {navItems.map(({ path, labelKey, icon: Icon }) => (
             <NavLink
               key={path}
@@ -69,7 +68,7 @@ export default function Sidebar({ open, onClose }) {
 
         {/* Favourites section */}
         {favCalcs.length > 0 && (
-          <div className="border-t border-light-border dark:border-dark-border px-3 py-4">
+          <div className="border-t border-light-border dark:border-dark-border px-3 py-4 shrink-0 max-h-52 overflow-y-auto">
             <p className="text-[10px] font-semibold text-light-muted dark:text-dark-muted uppercase tracking-wider mb-2 px-1">
               {t('favoritesTitle')}
             </p>

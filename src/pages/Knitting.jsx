@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Layers } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
-import CalcPage, { InputPanel, ResultPanel, CalcCard, CardInputs, CardResults } from '../components/ui/CalcPage';
+import CalcPage, { CalcCard, CardInputs, CardResults } from '../components/ui/CalcPage';
 import InputField from '../components/ui/InputField';
 import ResultCard from '../components/ui/ResultCard';
 import FormulaBox from '../components/ui/FormulaBox';

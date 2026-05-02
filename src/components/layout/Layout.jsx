@@ -12,17 +12,15 @@ export default function Layout() {
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg transition-colors duration-200 font-sans">
       <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-      <div className="flex">
-        <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      {/* Sidebar is always fixed — main/footer offset by lg:ml-60 */}
+      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-        <main className="flex-1 min-w-0 p-4 md:p-8 lg:ml-60">
-          <Outlet />
-        </main>
-      </div>
+      <main className="min-h-[calc(100vh-4rem)] lg:ml-60 p-4 md:p-6 lg:p-8">
+        <Outlet />
+      </main>
 
-      {/* Footer */}
       <footer className="lg:ml-60 border-t border-light-border dark:border-dark-border transition-colors duration-200">
-        <div className="max-w-5xl mx-auto px-4 md:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-light-muted dark:text-dark-muted">
+        <div className="max-w-5xl mx-auto px-4 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-light-muted dark:text-dark-muted">
           <div className="flex flex-col sm:flex-row items-center gap-2 text-center">
             <span>{t('footerDev')}</span>
             <span className="hidden sm:inline opacity-30">·</span>
