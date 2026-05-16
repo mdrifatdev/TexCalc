@@ -1,4 +1,5 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider } from './context/ThemeContext';
 import { LangProvider } from './context/LangContext';
 import { AppProvider } from './context/AppContext';
@@ -29,6 +30,7 @@ export default function App() {
               </Route>
             </Routes>
           </HashRouter>
+          <Analytics />
         </AppProvider>
       </LangProvider>
     </ThemeProvider>
