@@ -7,11 +7,16 @@ export default function ResultCard({ label, value, unit }) {
   const { t } = useLang();
   const [copied, setCopied] = useState(false);
   const [pop, setPop] = useState(false);
+  const [prevValue, setPrevValue] = useState(value);
+
+  if (value !== prevValue) {
+    setPrevValue(value);
+    setPop(false);
+  }
 
   // Trigger pop animation whenever value changes to a valid result
   useEffect(() => {
     if (value === null || value === undefined || value === '' || value === '—') return;
-    setPop(false);
     const id = requestAnimationFrame(() => {
       requestAnimationFrame(() => setPop(true));
     });

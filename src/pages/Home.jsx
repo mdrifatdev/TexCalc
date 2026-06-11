@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Wind, Grid3x3, Layers, Droplets, Shirt, ClipboardCheck, Search, X, Clock, Star, Trash2 } from 'lucide-react';
+import { Wind, Grid3x3, Layers, Droplets, Shirt, ClipboardCheck, Search, X, Clock, Star, Trash2, RefreshCw } from 'lucide-react';
 import CategoryCard from '../components/ui/CategoryCard';
 import { useLang } from '../context/LangContext';
 import { useApp } from '../context/AppContext';
@@ -13,16 +13,17 @@ const CATEGORIES = [
   { icon: Droplets,       titleKey: 'dyeing',   descKey: 'dyeingDesc',   path: '/dyeing'   },
   { icon: Shirt,          titleKey: 'garments', descKey: 'garmentsDesc', path: '/garments' },
   { icon: ClipboardCheck, titleKey: 'ttqc',     descKey: 'ttqcDesc',     path: '/ttqc'     },
+  { icon: RefreshCw,      titleKey: 'converter', descKey: 'converterDesc', path: '/converter' },
 ];
 
 const CATEGORY_BN = {
   spinning: 'স্পিনিং', weaving: 'উইভিং', knitting: 'নিটিং',
-  dyeing: 'ডাইং', garments: 'গার্মেন্টস', ttqc: 'টিটিকিউসি',
+  dyeing: 'ডাইং', garments: 'গার্মেন্টস', ttqc: 'টিটিকিউসি', converter: 'কনভার্টার',
 };
 
 export default function Home() {
   const { t, lang } = useLang();
-  const { history, clearHistory, favorites, isFavorite } = useApp();
+  const { history, clearHistory, favorites } = useApp();
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
 

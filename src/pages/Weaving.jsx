@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Grid3x3 } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
-import CalcPage, { InputPanel, ResultPanel, CalcCard, CardInputs, CardResults } from '../components/ui/CalcPage';
+import CalcPage, { CalcCard, CardInputs, CardResults } from '../components/ui/CalcPage';
 import InputField from '../components/ui/InputField';
 import ResultCard from '../components/ui/ResultCard';
 import FormulaBox from '../components/ui/FormulaBox';
@@ -256,8 +256,15 @@ function EfficiencyTab() {
 
 export default function Weaving() {
   const location = useLocation();
+  const [prevLocationKey, setPrevLocationKey] = useState(location.key);
   const [activeTab, setActiveTab] = useState(location.state?.tab || 'gsm');
-  useEffect(() => { if (location.state?.tab) setActiveTab(location.state.tab); }, [location.state]);
+
+  if (location.key !== prevLocationKey) {
+    setPrevLocationKey(location.key);
+    if (location.state?.tab) {
+      setActiveTab(location.state.tab);
+    }
+  }
 
   return (
     <CalcPage icon={Grid3x3} titleKey="weavingTitle" descKey="weavingDesc2"

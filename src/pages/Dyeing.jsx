@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Droplets } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import CalcPage, { CalcCard, CardInputs, CardResults } from '../components/ui/CalcPage';
@@ -245,8 +245,15 @@ function RecipeTab() {
 
 export default function Dyeing() {
   const location = useLocation();
+  const [prevLocationKey, setPrevLocationKey] = useState(location.key);
   const [activeTab, setActiveTab] = useState(location.state?.tab || 'liquor');
-  useEffect(() => { if (location.state?.tab) setActiveTab(location.state.tab); }, [location.state]);
+
+  if (location.key !== prevLocationKey) {
+    setPrevLocationKey(location.key);
+    if (location.state?.tab) {
+      setActiveTab(location.state.tab);
+    }
+  }
 
   return (
     <CalcPage icon={Droplets} titleKey="dyeingTitle" descKey="dyeingDesc2"

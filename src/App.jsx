@@ -11,6 +11,7 @@ import Knitting from './pages/Knitting';
 import Dyeing from './pages/Dyeing';
 import Garments from './pages/Garments';
 import TTQC from './pages/TTQC';
+import Converter from './pages/Converter';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
                 <Route path="dyeing"   element={<Dyeing />} />
                 <Route path="garments" element={<Garments />} />
                 <Route path="ttqc"     element={<TTQC />} />
+                <Route path="converter" element={<Converter />} />
               </Route>
             </Routes>
           </HashRouter>

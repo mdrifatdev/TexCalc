@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ClipboardCheck } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import CalcPage, { InputPanel, ResultPanel, CalcCard, CardInputs, CardResults } from '../components/ui/CalcPage';
@@ -250,8 +250,15 @@ function FabricTab() {
 
 export default function TTQC() {
   const location = useLocation();
+  const [prevLocationKey, setPrevLocationKey] = useState(location.key);
   const [activeTab, setActiveTab] = useState(location.state?.tab || 'aql');
-  useEffect(() => { if (location.state?.tab) setActiveTab(location.state.tab); }, [location.state]);
+
+  if (location.key !== prevLocationKey) {
+    setPrevLocationKey(location.key);
+    if (location.state?.tab) {
+      setActiveTab(location.state.tab);
+    }
+  }
 
   return (
     <CalcPage icon={ClipboardCheck} titleKey="ttqcTitle" descKey="ttqcDesc2"

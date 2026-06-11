@@ -17,6 +17,7 @@ export const translations = {
     dyeing:      'ডাইং',
     garments:    'গার্মেন্টস',
     ttqc:        'টি.টি.কিউ.সি',
+    converter:   'কনভার্টার',
 
     // Home
     heroTitle:      'টেক্সটাইল ইঞ্জিনিয়ারিং ক্যালকুলেটর',
@@ -29,6 +30,7 @@ export const translations = {
     dyeingDesc:     'লিকার রেশিও, কেমিক্যাল ডোজিং ও রেসিপি স্কেলিং',
     garmentsDesc:   'এফিশিয়েন্সি, কনসাম্পশন, টার্গেট ও কস্টিং',
     ttqcDesc:       'AQL, ডিফেক্ট রেট, DHU ও কোয়ালিটি মেট্রিক্স',
+    converterDesc:  'দৈর্ঘ্য, ওজন, সুতার কাউন্ট ও তাপমাত্রা রূপান্তরকারী',
 
     // Search
     searchPlaceholder: 'ক্যালকুলেটর খুঁজুন…',
@@ -429,6 +431,29 @@ export const translations = {
     gsmForGrade:        'জিএসএম',
     gsmGradeResult:    'গ্রেড',
 
+    // ── Converter ──
+    converterTitle:     'ইউনিট কনভার্টার',
+    converterDesc2:     'দৈর্ঘ্য, ওজন, সুতার কাউন্ট ও তাপমাত্রা রূপান্তরকারী',
+    lengthTab:          'দৈর্ঘ্য',
+    weightTab:          'ওজন',
+    countTab:           'সুতার কাউন্ট',
+    tempTab:            'তাপমাত্রা',
+    lengthTitle:        'দৈর্ঘ্য রূপান্তর',
+    weightTitle:        'ওজন রূপান্তর',
+    countTitle:         'সুতার কাউন্ট রূপান্তর',
+    tempTitle:          'তাপমাত্রা রূপান্তর',
+    inches:             'ইঞ্চি (in)',
+    yards:              'গজ (yd)',
+    meters:             'মিটার (m)',
+    cm:                 'সেন্টিমিটার (cm)',
+    kg:                 'কেজি (kg)',
+    grams:              'গ্রাম (g)',
+    lbs:                'পাউন্ড (lbs)',
+    oz:                 'আউন্স (oz)',
+    celsius:            'সেলসিয়াস (°C)',
+    fahrenheit:         'ফারেনহাইট (°F)',
+    kelvin:             'কেলভিন (K)',
+
     // Footer
     footerDev:      'ডেভেলপার: Md Rifat (mdrifatdev)',
     footerGithub:   'GitHub: github.com/mdrifatdev',
@@ -452,6 +477,7 @@ export const translations = {
     dyeing:      'Dyeing',
     garments:    'Garments',
     ttqc:        'TTQC',
+    converter:   'Converter',
 
     // Home
     heroTitle:      'Textile Engineering Calculator',
@@ -464,6 +490,7 @@ export const translations = {
     dyeingDesc:     'Liquor Ratio, Chemical Dosing & Recipe Scaling',
     garmentsDesc:   'Efficiency, Consumption, Targets & Costing',
     ttqcDesc:       'AQL, Defect Rate, DHU & Quality Metrics',
+    converterDesc:  'Convert between units of length, weight, count, and temperature',
 
     // Search
     searchPlaceholder: 'Search calculators…',
@@ -863,6 +890,29 @@ export const translations = {
     fabricGradeGSM:    'Fabric Grade by GSM',
     gsmForGrade:        'GSM',
     gsmGradeResult:    'Grade',
+
+    // ── Converter ──
+    converterTitle:     'Unit Converter',
+    converterDesc2:     'Instant conversions for Length, Weight, Yarn Count, and Temperature',
+    lengthTab:          'Length',
+    weightTab:          'Weight',
+    countTab:           'Yarn Count',
+    tempTab:            'Temperature',
+    lengthTitle:        'Length Conversion',
+    weightTitle:        'Weight Conversion',
+    countTitle:         'Yarn Count Conversion',
+    tempTitle:          'Temperature Conversion',
+    inches:             'Inches (in)',
+    yards:              'Yards (yd)',
+    meters:             'Meters (m)',
+    cm:                 'Centimeters (cm)',
+    kg:                 'Kilograms (kg)',
+    grams:              'Grams (g)',
+    lbs:                'Pounds (lbs)',
+    oz:                 'Ounces (oz)',
+    celsius:            'Celsius (°C)',
+    fahrenheit:         'Fahrenheit (°F)',
+    kelvin:             'Kelvin (K)',
 
     // Footer
     footerDev:      'Developer: Md Rifat (mdrifatdev)',

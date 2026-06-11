@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Wind } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import CalcPage, { InputPanel, ResultPanel, CalcCard, CardInputs, CardResults } from '../components/ui/CalcPage';
@@ -289,12 +289,16 @@ function QualityTab() {
 // ─── Spinning Page ────────────────────────────────────────────────────────────
 export default function Spinning() {
   const location = useLocation();
+  const [prevLocationKey, setPrevLocationKey] = useState(location.key);
   const [activeTab, setActiveTab] = useState(location.state?.tab || 'count');
 
   // Respond to navigation state changes (from search/history/sidebar)
-  useEffect(() => {
-    if (location.state?.tab) setActiveTab(location.state.tab);
-  }, [location.state]);
+  if (location.key !== prevLocationKey) {
+    setPrevLocationKey(location.key);
+    if (location.state?.tab) {
+      setActiveTab(location.state.tab);
+    }
+  }
 
   return (
     <CalcPage

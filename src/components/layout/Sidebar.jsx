@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Wind, Grid3x3, Layers, Droplets, Shirt, ClipboardCheck, Home, Star } from 'lucide-react';
+import { Wind, Grid3x3, Layers, Droplets, Shirt, ClipboardCheck, Home, Star, RefreshCw } from 'lucide-react';
 import { useLang } from '../../context/LangContext';
 import { useApp } from '../../context/AppContext';
 import { ALL_CALCULATORS } from '../../utils/calculators';
@@ -12,6 +12,7 @@ const navItems = [
   { path: '/dyeing',   labelKey: 'dyeing',   icon: Droplets },
   { path: '/garments', labelKey: 'garments', icon: Shirt },
   { path: '/ttqc',     labelKey: 'ttqc',     icon: ClipboardCheck },
+  { path: '/converter', labelKey: 'converter', icon: RefreshCw },
 ];
 
 export default function Sidebar({ open, onClose }) {

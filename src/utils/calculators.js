@@ -34,4 +34,10 @@ export const ALL_CALCULATORS = [
   { id: 'tt-defect',      page: '/ttqc',     tabId: 'defect',      category: 'ttqc',     bn: 'ডিফেক্ট মেট্রিক্স',               en: 'Defect Metrics' },
   { id: 'tt-quality',     page: '/ttqc',     tabId: 'quality',     category: 'ttqc',     bn: 'কোয়ালিটি মেট্রিক্স',              en: 'Quality Metrics' },
   { id: 'tt-fabric',      page: '/ttqc',     tabId: 'fabric',      category: 'ttqc',     bn: 'ফ্যাব্রিক টেস্ট',                  en: 'Fabric Tests' },
+
+  // ── Converter (calcPrefix="co") ───────────────────────────────────────────
+  { id: 'co-length',      page: '/converter', tabId: 'length',      category: 'converter', bn: 'দৈর্ঘ্য রূপান্তর',               en: 'Length Converter' },
+  { id: 'co-weight',      page: '/converter', tabId: 'weight',      category: 'converter', bn: 'ওজন রূপান্তর',                 en: 'Weight Converter' },
+  { id: 'co-count',       page: '/converter', tabId: 'count',       category: 'converter', bn: 'কাউন্ট রূপান্তর',               en: 'Yarn Count Converter' },
+  { id: 'co-temperature', page: '/converter', tabId: 'temperature', category: 'converter', bn: 'তাপমাত্রা রূপান্তর',            en: 'Temperature Converter' },
 ];
