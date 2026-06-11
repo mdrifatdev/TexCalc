@@ -56,7 +56,17 @@ export default function Navbar({ sidebarOpen, setSidebarOpen }) {
       {/* Logo */}
       <div className="flex items-center gap-2 shrink-0">
         <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-accent text-dark-bg">
-          <Layers size={16} strokeWidth={2.5} />
+          <svg className="w-5 h-5" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 9 h14 v2.5 H9 z" fill="currentColor" />
+            <path d="M9 20.5 h14 v2.5 H9 z" fill="currentColor" />
+            <rect x="14.5" y="11" width="3" height="10" fill="currentColor" opacity="0.4" />
+            <path d="M10 12.5 C 13 11, 19 14, 22 12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+            <path d="M10 14.5 C 13 13, 19 16, 22 14.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+            <path d="M10 16.5 C 13 15, 19 18, 22 16.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+            <path d="M10 18.5 C 13 17, 19 20, 22 18.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+            <line x1="7" y1="23" x2="25" y2="5" stroke="currentColor" strokeWidth="1.2" strokeDasharray="2 2" opacity="0.8" />
+            <line x1="7" y1="5" x2="25" y2="23" stroke="currentColor" strokeWidth="1.2" strokeDasharray="2 2" opacity="0.8" />
+          </svg>
         </div>
         <span className="font-bold text-lg text-slate-900 dark:text-white transition-colors duration-200">
           {t('appName')}
